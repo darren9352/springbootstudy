@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 @Component
-public class H2Runner implements ApplicationRunner {
+public class MySQLRunner implements ApplicationRunner {
     @Autowired
     DataSource dataSource;
 
@@ -21,11 +21,12 @@ public class H2Runner implements ApplicationRunner {
     JdbcTemplate jdbcTemplate;
 
 
-    Logger logger = LoggerFactory.getLogger(H2Runner.class);
+    Logger logger = LoggerFactory.getLogger(MySQLRunner.class);
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try(Connection connection = dataSource.getConnection()) {
+            System.out.println(dataSource.getClass());
             logger.info(connection.getMetaData().getURL());
             logger.info(connection.getMetaData().getUserName());
 
