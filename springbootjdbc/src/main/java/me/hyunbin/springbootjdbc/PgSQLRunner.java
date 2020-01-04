@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 
 @Component
-public class MySQLRunner implements ApplicationRunner {
+public class PgSQLRunner implements ApplicationRunner {
     @Autowired
     DataSource dataSource;
 
@@ -21,7 +21,7 @@ public class MySQLRunner implements ApplicationRunner {
     JdbcTemplate jdbcTemplate;
 
 
-    Logger logger = LoggerFactory.getLogger(MySQLRunner.class);
+    Logger logger = LoggerFactory.getLogger(PgSQLRunner.class);
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -31,9 +31,9 @@ public class MySQLRunner implements ApplicationRunner {
             logger.info(connection.getMetaData().getUserName());
 
             Statement statement = connection.createStatement();
-            String sql = "CREATE TABLE USER(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY (id))";
+            String sql = "CREATE TABLE account(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY (id))";
             statement.executeUpdate(sql);
         }
-        jdbcTemplate.execute("INSERT INTO USER VALUES (1, 'hyunbin')");
+        jdbcTemplate.execute("INSERT INTO account VALUES (1, 'hyunbin')");
     }
 }
